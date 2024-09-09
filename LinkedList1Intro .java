@@ -213,7 +213,7 @@ class LinkedList1Intro {
 
             //step 2: reverse 2nd half
             Node prev = null;
-            Node curr = midNode;
+            cNode curr = midNode;
             Node next;
 
             while(curr != null) {
