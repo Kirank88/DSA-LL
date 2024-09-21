@@ -213,7 +213,7 @@ class LinkedList1Intro {
 
             //step 2: reverse 2nd half
             Node prev = null;
-            cNode curr = midNode;
+            Node curr = midNode;
             Node next;
 
             while(curr != null) {
@@ -237,15 +237,66 @@ class LinkedList1Intro {
             return true;
        }
 
+       public static  boolean isCycle() {
+        Node slow = head;
+        Node fast = head;
+
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast) {
+                return true;
+
+            }
+        }
+
+        return false;
+
+       }
+
+       public static void removeCycle() {
+        //detect cycle
+            Node slow = head;
+            Node fast = head;
+            boolean cycle = false;
+
+            while(fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+
+                if(fast == slow) {
+                    cycle = true;
+                    break;
+
+                }
+
+            }
+
+            if(cycle == false) {
+                return;
+            }
+             //find meeting point
+             slow = head;
+             Node prev = null;
+             while(slow != fast) {
+                prev = fast;
+                slow = slow.next;
+                fast = fast.next;
+             }
+
+             //remove cycle
+             prev.next = null;
+       }
+
 
 
     public static void main(String[] args) {
-        LinkedList1Intro ll = new LinkedList1Intro();
-        ll.print();
-        ll.addFirst(1);
-        ll.addFirst(2);
-        ll.addLast(2);
-        ll.addLast(1);
+        // LinkedList1Intro ll = new LinkedList1Intro();
+        // ll.print();
+        // ll.addFirst(1);
+        // ll.addFirst(2);
+        // ll.addLast(2);
+        // ll.addLast(1);
         /* 
         ll.addMiddle(2, 11);
         ll.print();
@@ -267,7 +318,21 @@ class LinkedList1Intro {
         System.out.println("Linked List size is: " + ll.size);
         */
 
-        System.out.println(ll.checkPalindrome());
+        //System.out.println(ll.checkPalindrome());
+
+
+        head = new Node(1);
+        head.next = new Node(2);
+        Node temp = new Node(6);
+        head.next = temp; 
+        head.next.next = new Node(3);
+        head.next.next.next = head;
+        //1 -> 2-> 3-> -> 1
+
+        System.out.println(isCycle());
+        removeCycle();
+        System.out.println(isCycle());
+
          
     }
 }
