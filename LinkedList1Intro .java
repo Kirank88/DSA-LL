@@ -117,6 +117,10 @@ class LinkedList1Intro {
      }
 
      public void reverse() {
+
+        if(head == null || head.next == null) {
+            return;
+        }
         Node prev = null;
         Node curr =  tail = head;
         Node next;
@@ -324,7 +328,7 @@ class LinkedList1Intro {
         head = new Node(1);
         head.next = new Node(2);
         Node temp = new Node(6);
-        head.next = temp; 
+        head.next = temp;  
         head.next.next = new Node(3);
         head.next.next.next = head;
         //1 -> 2-> 3-> -> 1
